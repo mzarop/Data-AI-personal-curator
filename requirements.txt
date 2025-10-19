@@ -2,3 +2,7 @@ numpy == 2.3.0
 pandas == 2.3.3
 # this lib is used to read rss data
 feedparser == 6.0.12
+# yaml files for configs
+PyYAML == 6.0.3
+# check the ecoding detector
+chardet == 5.2.0

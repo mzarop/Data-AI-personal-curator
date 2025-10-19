@@ -1,0 +1,9 @@
+# this is the config.yaml file to set configs and run the application
+
+source:
+  rss_url: "https://news.google.com/rss"
+  keyword: "Python"
+
+output:
+  save_to_file: true
+  file_name: "data/output_data.csv"
