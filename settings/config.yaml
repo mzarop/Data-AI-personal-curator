@@ -7,3 +7,8 @@ source:
 output:
   save_to_file: true
   file_name: "data/output_data.csv"
+
+users:
+  name: "Michalis"
+  surname: "Zaropoulos"
+  tags: ["AI","Machine Learning","US"]

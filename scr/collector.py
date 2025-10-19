@@ -15,7 +15,7 @@ def collect_save_data(config):
                  "Link":[],
                  "Published":[]}
 
-    for entry in feed.entries[:5]:
+    for entry in feed.entries[:]:
         dict_data["Title"].append(entry.title)
         dict_data['Link'].append(entry.link)
         dict_data['Published'].append(entry.published)
