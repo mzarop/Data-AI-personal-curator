@@ -1,35 +1,30 @@
 import feedparser
 import csv
 
-# RSS feed URL
-rss_url = "https://news.google.com/rss"
+def collect_save_data(config):
+    # RSS feed URL
+    rss_url = config['source']['rss_url']
+    save_to_file = config['output']['save_to_file']
+    file_name = config['output']['file_name']
 
-# Parse the feed
-feed = feedparser.parse(rss_url)
+    # Parse the feed
+    feed = feedparser.parse(rss_url)
 
-# Print feed title
-print(f"Feed Title: {feed.feed.title}\n")
+    # create an empty dictionary to insert the data
+    dict_data = {"Title":[],
+                 "Link":[],
+                 "Published":[]}
 
-for entry in feed.entries[:5]:
-    print(f" Title: {entry.title}")
-    print(f" Link:{entry.link}")
-    print(f" Published: {entry.published}")
-    print(f" Summary: {entry.summary[:200]}...") # first 100 characters
-    print(" -"*40)
+    for entry in feed.entries[:5]:
+        dict_data["Title"].append(entry.title)
+        dict_data['Link'].append(entry.link)
+        dict_data['Published'].append(entry.published)
 
-# create an empty dictionary to insert the data
-dict_data = {"Title":[],
-             "Link":[],
-             "Published":[]}
-
-for entry in feed.entries[:5]:
-    dict_data["Title"].append(entry.title)
-    dict_data['Link'].append(entry.link)
-    dict_data['Published'].append(entry.published)
-
-# save data as csv under data folder
-with open("../data/output_data.csv","w",newline="") as file:
-    writer = csv.writer(file)
-    writer.writerow(dict_data.keys())
-    writer.writerows(zip(*dict_data.values()))
+    # save data as csv under data folder
+    if save_to_file:
+        with open(f'{file_name}',"w",newline="") as file:
+            writer = csv.writer(file)
+            writer.writerow(dict_data.keys())
+            writer.writerows(zip(*dict_data.values()))
+        print(f"\nArticles saved in {file_name}")
 
